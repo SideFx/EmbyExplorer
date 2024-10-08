@@ -102,3 +102,8 @@ func mainWindowWillClose() {
 	settings.SetPreferences(prefs)
 	_ = SavePreferences()
 }
+
+func AllowQuitCallback() bool {
+	mainWindow.AttemptClose()
+	return true
+}
