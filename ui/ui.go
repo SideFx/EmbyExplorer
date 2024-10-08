@@ -18,6 +18,11 @@ const (
 	wndMinHeight float32 = 480
 )
 
+const (
+	localHost = "localhost"
+	timeout   = 1
+)
+
 var mainWindow *unison.Window
 
 func NewMainWindow() error {

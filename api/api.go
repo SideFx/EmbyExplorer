@@ -9,11 +9,16 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"github.com/richardwilkes/toolbox/errs"
+	"golang.org/x/net/icmp"
+	"golang.org/x/net/ipv4"
 	"io"
+	"net"
 	"net/http"
 	"os"
 	"runtime"
 	"strings"
+	"time"
 )
 
 const (
@@ -348,6 +353,67 @@ func UserGetItenmsInt(collectionid string, collectiontype string) ([]BaseItemDto
 
 func GetPrimaryImageForItemInt(itemid string, format ImageFormat, maxwidth string, maxheight string) ([]byte, error) {
 	return GetPrimaryImageForItem(itemid, format, maxwidth, maxheight, EmbySession.AccessToken)
+}
+
+// Stripped down version of https://www.sobyte.net/post/2023-05/go-ping/
+func onePing(hostname string) error {
+	const protocolICMP = 1
+	c, err := icmp.ListenPacket("udp4", "0.0.0.0")
+	if err != nil {
+		return err
+	}
+	defer func(c *icmp.PacketConn) {
+		_ = c.Close()
+	}(c)
+	msg := &icmp.Message{
+		Type: ipv4.ICMPTypeEcho,
+		Code: 0,
+		Body: &icmp.Echo{
+			ID:   os.Getpid() & 0xffff,
+			Seq:  1,
+			Data: []byte("Hello, are you there!"),
+		},
+	}
+	wb, err := msg.Marshal(nil)
+	if err != nil {
+		return err
+	}
+	if _, err := c.WriteTo(wb, &net.UDPAddr{IP: net.ParseIP(hostname)}); err != nil {
+		return err
+	}
+	reply := make([]byte, 1500)
+	err = c.SetReadDeadline(time.Now().Add(5 * time.Second))
+	if err != nil {
+		return err
+	}
+	n, _, err := c.ReadFrom(reply)
+	if err != nil {
+		return err
+	}
+	msg, err = icmp.ParseMessage(protocolICMP, reply[:n])
+	if err != nil {
+		return err
+	}
+	switch msg.Type {
+	case ipv4.ICMPTypeEchoReply:
+		_, ok := msg.Body.(*icmp.Echo)
+		if !ok {
+			return errs.New("invalid ICMP Echo Reply message")
+		}
+		return nil
+	default:
+		return errs.New("unexpected ICMP message type")
+	}
+}
+
+// CheckEmby - MacOS Sequoia - let the network search auth. request kick in
+func CheckEmby(host string) {
+	for i := 0; i < 3; i++ {
+		e := onePing(host)
+		if e == nil {
+			break
+		}
+	}
 }
 
 func createPair(key string, value string) string {

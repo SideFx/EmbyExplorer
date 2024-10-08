@@ -6,6 +6,7 @@
 package ui
 
 import (
+	"Emby_Explorer/api"
 	"Emby_Explorer/assets"
 	"Emby_Explorer/settings"
 	"encoding/json"
@@ -54,6 +55,9 @@ func LoadPreferences() error {
 	if err == nil {
 		s.EmbyPassword = decode(s.EmbyPassword)
 		settings.SetPreferences(s)
+		if s.EmbyServer != "" {
+			api.CheckEmby(s.EmbyServer)
+		}
 	}
 	return err
 }

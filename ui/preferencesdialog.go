@@ -133,6 +133,7 @@ func saveSettings() {
 		// must update emby session parameters for REST api
 		s := settings.GetPreferences()
 		api.InitApiPreferences(s.EmbySecure, s.EmbyServer, s.EmbyPort, s.EmbyUser, string(s.EmbyPassword))
+		api.CheckEmby(s.EmbyServer)
 		authBtn.SetEnabled(true) // enable button for authorization
 	}
 }
