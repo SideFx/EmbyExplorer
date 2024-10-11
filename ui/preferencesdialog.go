@@ -37,6 +37,10 @@ func PreferencesDialog() {
 	if err == nil {
 		wnd := dialog.Window()
 		wnd.SetTitle(assets.CapPreferences)
+		prepareTitleIcon()
+		if len(titleIcons) > 0 {
+			wnd.SetTitleIcons(titleIcons)
+		}
 		okButton = dialog.Button(unison.ModalResponseOK)
 		okButton.ClickCallback = func() {
 			saveSettings()

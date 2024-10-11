@@ -22,6 +22,9 @@ func AboutDialog(item unison.MenuItem) {
 	if err == nil {
 		wnd := dialog.Window()
 		wnd.SetTitle(item.Title())
+		if len(titleIcons) > 0 {
+			wnd.SetTitleIcons(titleIcons)
+		}
 		okButton = dialog.Button(unison.ModalResponseOK)
 		okButton.ClickCallback = func() {
 			dialog.StopModal(unison.ModalResponseOK)
@@ -121,10 +124,14 @@ func DialogToDisplaySystemError(primary string, detail error) {
 	} else {
 		wnd := dialog.Window()
 		wnd.SetTitle(assets.CapError)
+		if len(titleIcons) > 0 {
+			wnd.SetTitleIcons(titleIcons)
+		}
 		dialog.RunModal()
 	}
 }
 
+/* unused
 func DialogToDisplayErrorMessage(primary string, detail string) {
 	panel := unison.NewMessagePanel(primary, detail)
 	if dialog, err := unison.NewDialog(unison.DefaultDialogTheme.ErrorIcon, unison.DefaultDialogTheme.ErrorIconInk, panel,
@@ -133,6 +140,10 @@ func DialogToDisplayErrorMessage(primary string, detail string) {
 	} else {
 		wnd := dialog.Window()
 		wnd.SetTitle(assets.CapError)
+		if len(titleIcons) > 0 {
+			wnd.SetTitleIcons(titleIcons)
+		}
 		dialog.RunModal()
 	}
 }
+*/

@@ -64,6 +64,10 @@ func NewMainWindow() error {
 		api.InitApiPreferences(prefs.EmbySecure, prefs.EmbyServer, prefs.EmbyPort, prefs.EmbyUser, string(prefs.EmbyPassword))
 	}
 	setFunctions(true, v, false, false, false)
+	prepareTitleIcon()
+	if len(titleIcons) > 0 {
+		mainWindow.SetTitleIcons(titleIcons)
+	}
 	mainWindow.ToFront()
 	return nil
 }

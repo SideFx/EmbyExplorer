@@ -36,6 +36,9 @@ func detailsWindowDisplay() {
 	if err != nil {
 		panic(err)
 	}
+	if len(titleIcons) > 0 {
+		detailsWindow.SetTitleIcons(titleIcons)
+	}
 	if focused := unison.ActiveWindow(); focused != nil {
 		frame = focused.FrameRect()
 	} else {

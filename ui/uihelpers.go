@@ -40,6 +40,7 @@ var logoPanel *unison.Panel
 var tableScrollArea *unison.ScrollPanel
 var collectionType = ""
 var canDisplayDetails = false
+var titleIcons []*unison.Image
 
 func newSVGButton(svg *unison.SVG) *unison.Button {
 	btn := unison.NewButton()
@@ -345,6 +346,13 @@ func newHomeVideoTable(content *unison.Panel, homevideoData []models.HomeVideoDa
 	})
 	tableScrollArea.SetColumnHeader(header)
 	content.AddChild(tableScrollArea)
+}
+
+func prepareTitleIcon() {
+	newImage, err := unison.NewImageFromBytes(assets.Emby, 1)
+	if err == nil {
+		titleIcons = append(titleIcons, newImage)
+	}
 }
 
 func newImageFromBytes(itemid string) (*unison.Image, error) {
