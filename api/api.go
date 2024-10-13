@@ -88,8 +88,6 @@ const (
 	FolderType  = "Folder"
 )
 
-const statusCodeOK = 200
-
 // Body for auth. REST call
 type authBody struct {
 	Username string
@@ -171,7 +169,7 @@ func FindUserIdByName(username string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if response.StatusCode != statusCodeOK {
+	if response.StatusCode != http.StatusOK {
 		return "", errors.New(response.Status)
 	}
 	defer response.Body.Close()
@@ -205,7 +203,7 @@ func AuthenticateUserByCredentials(username string, password string) error {
 	url := CreateRestUrl(POSTAuthenticateUser)
 	header := createHeader(id)
 	clnt := &http.Client{}
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jbody))
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(jbody))
 	if err != nil {
 		return err
 	}
@@ -215,7 +213,7 @@ func AuthenticateUserByCredentials(username string, password string) error {
 	if err != nil {
 		return err
 	}
-	if response.StatusCode != statusCodeOK {
+	if response.StatusCode != http.StatusOK {
 		return errors.New(response.Status)
 	}
 	defer response.Body.Close()
@@ -240,7 +238,7 @@ func UserGetViews(userid string, accesstoken string) ([]UserView, error) {
 	if err != nil {
 		return nil, err
 	}
-	if response.StatusCode != statusCodeOK {
+	if response.StatusCode != http.StatusOK {
 		return nil, errors.New(response.Status)
 	}
 	defer response.Body.Close()
@@ -280,7 +278,7 @@ func UserGetItems(userid string, collectionid string, collectiontype string, acc
 	if err != nil {
 		return nil, err
 	}
-	if response.StatusCode != statusCodeOK {
+	if response.StatusCode != http.StatusOK {
 		return nil, errors.New(response.Status)
 	}
 	defer response.Body.Close()
@@ -328,7 +326,7 @@ func GetPrimaryImageForItem(itemid string, format ImageFormat, maxwidth string, 
 	if err != nil {
 		return nil, err
 	}
-	if response.StatusCode != statusCodeOK {
+	if response.StatusCode != http.StatusOK {
 		return nil, errors.New(response.Status)
 	}
 	defer response.Body.Close()
