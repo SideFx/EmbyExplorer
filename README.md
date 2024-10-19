@@ -11,8 +11,10 @@ Preferences
 Home videos
 <img width="1737" alt="image" src="https://github.com/user-attachments/assets/7d757e86-3ad0-4c49-8dca-73b43e3214f4">
 
+Without zebra stripes
+<img width="1463" alt="image" src="https://github.com/user-attachments/assets/f904982f-33d8-4537-b5c9-c53a1aa5d0ef">
 
-New floating window for cover art and summary (Movies and TV shows only)
+Floating window for cover art and summary (Movies and TV shows only)
 <img width="734" alt="image" src="https://github.com/user-attachments/assets/dcc4e328-0720-47b7-9e00-48ac61578f65">
 
 
