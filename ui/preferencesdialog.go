@@ -25,6 +25,7 @@ var inpPort *unison.Field
 var inpUser *unison.Field
 var inpPassword *unison.Field
 var chkSecure *unison.CheckBox
+var chkZebra *unison.CheckBox
 
 func PreferencesDialogFromMenu(_ unison.MenuItem) {
 	PreferencesDialog()
@@ -51,6 +52,10 @@ func PreferencesDialog() {
 		chkSecure.State = check.Off
 		if s.EmbySecure {
 			chkSecure.State = check.On
+		}
+		chkZebra.State = check.Off
+		if s.ZebraStripes {
+			chkZebra.State = check.On
 		}
 		inpServer.SetText(s.EmbyServer)
 		inpPort.SetText(s.EmbyPort)
@@ -97,6 +102,10 @@ func newPreferencesPanel() *unison.Panel {
 	inpPassword.Font = unison.FieldFont
 	inpPassword.ObscurementRune = obscureRune
 	inpPassword.MinimumTextWidth = inpTextSizeMax
+	lblZebra := unison.NewLabel()
+	lblZebra.Font = unison.LabelFont
+	lblZebra.SetTitle(assets.CapZebraStripes)
+	chkZebra = unison.NewCheckBox()
 	inpServer.ModifiedCallback = func(before, after *unison.FieldState) {
 		inpModifiedCallback(before, after)
 	}
@@ -125,13 +134,23 @@ func newPreferencesPanel() *unison.Panel {
 	panel.AddChild(inpUser)
 	panel.AddChild(lblPassword)
 	panel.AddChild(inpPassword)
+	createSVpacer(5, panel)
+	createSVpacer(5, panel)
+	panel.AddChild(lblZebra)
+	panel.AddChild(chkZebra)
 	panel.Pack()
 	return panel
 }
 
 func saveSettings() {
-	settings.SetPreferencesDetail(mainWindow.FrameRect(), chkSecure.State == check.On, inpServer.Text(),
-		inpPort.Text(), inpUser.Text(), inpPassword.Text())
+	settings.SetPreferencesDetail(
+		mainWindow.FrameRect(),
+		chkZebra.State == check.On,
+		chkSecure.State == check.On,
+		inpServer.Text(),
+		inpPort.Text(),
+		inpUser.Text(),
+		inpPassword.Text())
 	_ = SavePreferences()
 	if settings.Valid() {
 		// must update emby session parameters for REST api
@@ -149,4 +168,16 @@ func inpModifiedCallback(_, _ *unison.FieldState) {
 // authorization data complete?
 func checkOk() bool {
 	return inpServer.Text() != "" && inpPort.Text() != "" && inpUser.Text() != "" && inpPassword.Text() != ""
+}
+
+func createSVpacer(height float32, panel *unison.Panel) {
+	spacer := &unison.Panel{}
+	spacer.Self = spacer
+	spacer.SetSizer(func(_ unison.Size) (minSize, prefSize, maxSize unison.Size) {
+		minSize.Height = height
+		prefSize.Height = height
+		maxSize.Height = height
+		return
+	})
+	panel.AddChild(spacer)
 }

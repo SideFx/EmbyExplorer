@@ -11,6 +11,7 @@ import (
 	"Emby_Explorer/api"
 	"Emby_Explorer/assets"
 	"Emby_Explorer/models"
+	"Emby_Explorer/settings"
 	"github.com/richardwilkes/toolbox/tid"
 	"github.com/richardwilkes/unison"
 	"github.com/richardwilkes/unison/enums/align"
@@ -64,7 +65,7 @@ func createButton(title string, svgcontent string) (*unison.Button, error) {
 	return btn, nil
 }
 
-func createSpacer(width float32, panel *unison.Panel) {
+func createHSpacer(width float32, panel *unison.Panel) {
 	spacer := &unison.Panel{}
 	spacer.Self = spacer
 	spacer.SetSizer(func(_ unison.Size) (minSize, prefSize, maxSize unison.Size) {
@@ -105,13 +106,13 @@ func createToolbarPanel() *unison.Panel {
 		panel.AddChild(authBtn)
 		authBtn.ClickCallback = func() { embyAuthenticateUser() }
 	}
-	createSpacer(25, panel)
+	createHSpacer(25, panel)
 	lblItems := unison.NewLabel()
 	lblItems.Font = unison.LabelFont.Face().Font(toolbarFontSize)
 	lblItems.SetTitle(assets.CapViews)
 	lblItems.SetLayoutData(align.Middle)
 	panel.AddChild(lblItems)
-	createSpacer(5, panel)
+	createHSpacer(5, panel)
 	viewsPopupMenu = unison.NewPopupMenu[string]()
 	viewsPopupMenu.SetLayoutData(align.Middle)
 	viewsPopupMenu.Font = unison.LabelFont.Face().Font(toolbarFontSize)
@@ -124,7 +125,7 @@ func createToolbarPanel() *unison.Panel {
 	})
 	viewsPopupMenu.SetFocusable(false)
 	panel.AddChild(viewsPopupMenu)
-	createSpacer(5, panel)
+	createHSpacer(5, panel)
 	fetchBtn, err = createButton(assets.CapFetch, assets.IconFetch)
 	if err == nil {
 		fetchBtn.SetEnabled(true)
@@ -206,6 +207,7 @@ func switchView() {
 }
 
 func newMovieTable(content *unison.Panel, movieData []models.MovieData) {
+	checkZebra() //check if table should have zebra stripes
 	models.MovieTable = unison.NewTable[*models.MovieRow](&unison.SimpleTableModel[*models.MovieRow]{})
 	models.MovieTable.Columns = make([]unison.ColumnInfo, models.MovieTableDescription.NoOfColumns)
 	for i := range models.MovieTable.Columns {
@@ -257,6 +259,7 @@ func newMovieTable(content *unison.Panel, movieData []models.MovieData) {
 }
 
 func newTVShowTable(content *unison.Panel, tvshowData []models.TVShowData) {
+	checkZebra() //check if table should have zebra stripes
 	models.TVShowTable = unison.NewTable[*models.TVShowRow](&unison.SimpleTableModel[*models.TVShowRow]{})
 	models.TVShowTable.Columns = make([]unison.ColumnInfo, models.TVShowTableDescription.NoOfColumns)
 	for i := range models.TVShowTable.Columns {
@@ -308,6 +311,7 @@ func newTVShowTable(content *unison.Panel, tvshowData []models.TVShowData) {
 }
 
 func newHomeVideoTable(content *unison.Panel, homevideoData []models.HomeVideoData) {
+	checkZebra() //check if table should have zebra stripes
 	models.HomeVideoTable = unison.NewTable[*models.HomeVideoRow](&unison.SimpleTableModel[*models.HomeVideoRow]{})
 	models.HomeVideoTable.Columns = make([]unison.ColumnInfo, models.HomeVideoTableDescription.NoOfColumns)
 	for i := range models.HomeVideoTable.Columns {
@@ -363,4 +367,13 @@ func newImageFromBytes(itemid string) (*unison.Image, error) {
 	}
 	newImage, err = unison.NewImageFromBytes(image, 1)
 	return newImage, nil
+}
+
+func checkZebra() {
+	if !settings.GetPreferences().ZebraStripes {
+		unison.DefaultTableTheme.IndirectSelectionInk = unison.DefaultTableTheme.BackgroundInk
+		unison.DefaultTableTheme.OnIndirectSelectionInk = unison.DefaultTableTheme.OnBackgroundInk
+		unison.DefaultTableTheme.BandingInk = unison.DefaultTableTheme.BackgroundInk
+		unison.DefaultTableTheme.OnBandingInk = unison.DefaultTableTheme.OnBackgroundInk
+	}
 }

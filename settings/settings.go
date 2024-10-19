@@ -9,6 +9,7 @@ import "github.com/richardwilkes/unison"
 
 type Settings struct {
 	WindowRect       unison.Rect
+	ZebraStripes     bool
 	EmbySecure       bool
 	EmbyServer       string
 	EmbyPort         string
@@ -19,8 +20,9 @@ type Settings struct {
 
 var settings Settings
 
-func SetPreferencesDetail(rect unison.Rect, secure bool, server string, port string, user string, password string) {
+func SetPreferencesDetail(rect unison.Rect, zebra bool, secure bool, server string, port string, user string, password string) {
 	settings.WindowRect = rect
+	settings.ZebraStripes = zebra
 	settings.EmbySecure = secure
 	settings.EmbyServer = server
 	settings.EmbyPort = port

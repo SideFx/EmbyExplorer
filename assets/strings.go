@@ -12,7 +12,7 @@ const (
 
 const (
 	CapError        = "Error"
-	CapPreferences  = "Emby connection settings"
+	CapPreferences  = "Preferences"
 	CapAuthenticate = "Authenticate"
 	CapViews        = "Views"
 	CapFetch        = "Fetch"
@@ -23,6 +23,7 @@ const (
 	CapSecure       = "Use https protocol"
 	CapDetails      = "Details"
 	CapExport       = "Export"
+	CapZebraStripes = "Zebra Stripes"
 )
 
 const (
