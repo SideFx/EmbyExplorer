@@ -1,13 +1,12 @@
 Emby Explorer (w) 2024 Jan Buchholz
 
 Home screen
-<img width="1547" alt="image" src="https://github.com/user-attachments/assets/6b8c5c6c-e604-4064-b5dd-567e5eb63c00">
+<img width="1463" alt="image" src="https://github.com/user-attachments/assets/6c618d19-29fe-4025-ae27-b0e7ff4b50e4">
 
 
-Connection settings
+Preferences
 
-<img width="365" alt="image" src="https://github.com/user-attachments/assets/92ce579b-c26e-4baa-bcfe-569d65bcacaa">
-
+<img width="365" alt="image" src="https://github.com/user-attachments/assets/eb14f82b-dafb-4ee4-a691-36ce55606e54">
 
 Home videos
 <img width="1737" alt="image" src="https://github.com/user-attachments/assets/7d757e86-3ad0-4c49-8dca-73b43e3214f4">
