@@ -63,6 +63,7 @@ func embyFetchItemsForUser() {
 			detailsBtn.SetEnabled(true)
 			exportBtn.SetEnabled(true)
 		}
+		break
 	case api.CollectionTVShows:
 		models.TVShowDataTable = api.GetTVShowDisplayData(dto)
 		newTVShowTable(mainContent, models.TVShowDataTable)
@@ -71,6 +72,7 @@ func embyFetchItemsForUser() {
 			detailsBtn.SetEnabled(true)
 			exportBtn.SetEnabled(true)
 		}
+		break
 	case api.CollectionHomeVideos:
 		models.HomeVideoDataTable = api.GetHomeVideoDisplayData(dto)
 		newHomeVideoTable(mainContent, models.HomeVideoDataTable)
@@ -78,6 +80,7 @@ func embyFetchItemsForUser() {
 			models.HomeVideoTable.SelectByIndex(0)
 			exportBtn.SetEnabled(true)
 		}
+		break
 	default:
 	}
 }
@@ -119,6 +122,7 @@ func buildAndExport(collection string) {
 			}
 		}
 		sheet = assets.CapMovies
+		break
 	case api.CollectionTVShows:
 		for i = 0; i < models.TVShowTableDescription.NoOfColumns; i++ {
 			c.XLSCell = models.TVShowTableDescription.Columns[i].XLSColumn + strconv.Itoa(j)
@@ -136,6 +140,7 @@ func buildAndExport(collection string) {
 			}
 		}
 		sheet = assets.CapTVShows
+		break
 	case api.CollectionHomeVideos:
 		for i = 0; i < models.HomeVideoTableDescription.NoOfColumns; i++ {
 			c.XLSCell = models.HomeVideoTableDescription.Columns[i].XLSColumn + strconv.Itoa(j)
@@ -153,6 +158,7 @@ func buildAndExport(collection string) {
 			}
 		}
 		sheet = assets.CapHomeVideos
+		break
 	default:
 		return
 	}

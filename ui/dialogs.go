@@ -130,20 +130,3 @@ func DialogToDisplaySystemError(primary string, detail error) {
 		dialog.RunModal()
 	}
 }
-
-/* unused
-func DialogToDisplayErrorMessage(primary string, detail string) {
-	panel := unison.NewMessagePanel(primary, detail)
-	if dialog, err := unison.NewDialog(unison.DefaultDialogTheme.ErrorIcon, unison.DefaultDialogTheme.ErrorIconInk, panel,
-		[]*unison.DialogButtonInfo{unison.NewOKButtonInfo()}, unison.NotResizableWindowOption()); err != nil {
-		errs.Log(err)
-	} else {
-		wnd := dialog.Window()
-		wnd.SetTitle(assets.CapError)
-		if len(titleIcons) > 0 {
-			wnd.SetTitleIcons(titleIcons)
-		}
-		dialog.RunModal()
-	}
-}
-*/

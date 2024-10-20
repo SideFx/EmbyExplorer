@@ -155,28 +155,40 @@ func (d *MovieRow) ColumnCell(_, col int, foreground, _ unison.Ink, _, _, _ bool
 	switch col {
 	case 0:
 		text = d.M.Name
+		break
 	case 1:
 		text = d.M.OriginalTitle
+		break
 	case 2:
 		text = d.M.ProductionYear
+		break
 	case 3:
 		text = d.M.Runtime
+		break
 	case 4:
 		text = d.M.Actors
+		break
 	case 5:
 		text = d.M.Directors
+		break
 	case 6:
 		text = d.M.Studios
+		break
 	case 7:
 		text = d.M.Genres
+		break
 	case 8:
 		text = d.M.Container
+		break
 	case 9:
 		text = d.M.Codecs
+		break
 	case 10:
 		text = d.M.Resolution
+		break
 	case 11:
 		text = d.M.Path
+		break
 	default:
 		text = ""
 	}
@@ -343,28 +355,40 @@ func (d *TVShowRow) ColumnCell(_, col int, foreground, _ unison.Ink, _, _, _ boo
 	switch col {
 	case 0:
 		text = d.M.Name
+		break
 	case 1:
 		text = d.M.Episode
+		break
 	case 2:
 		text = d.M.Season
+		break
 	case 3:
 		text = d.M.ProductionYear
+		break
 	case 4:
 		text = d.M.Runtime
+		break
 	case 5:
 		text = d.M.Actors
+		break
 	case 6:
 		text = d.M.Studios
+		break
 	case 7:
 		text = d.M.Genres
+		break
 	case 8:
 		text = d.M.Container
+		break
 	case 9:
 		text = d.M.Codecs
+		break
 	case 10:
 		text = d.M.Resolution
+		break
 	case 11:
 		text = d.M.Path
+		break
 	default:
 		text = ""
 	}
@@ -534,18 +558,25 @@ func (d *HomeVideoRow) ColumnCell(_, col int, foreground, _ unison.Ink, _, _, _ 
 	switch col {
 	case 0:
 		text = d.M.Name
+		break
 	case 1:
 		text = d.M.Folder
+		break
 	case 2:
 		text = d.M.Runtime
+		break
 	case 3:
 		text = d.M.Container
+		break
 	case 4:
 		text = d.M.Codecs
+		break
 	case 5:
 		text = d.M.Resolution
+		break
 	case 6:
 		text = d.M.Path
+		break
 	default:
 		text = ""
 	}

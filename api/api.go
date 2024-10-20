@@ -304,14 +304,17 @@ func UserGetItems(userid string, collectionid string, collectiontype string, acc
 			if item.Type_ == MovieType {
 				result = append(result, item)
 			}
+			break
 		case CollectionTVShows:
 			if item.Type_ == SeriesType || item.Type_ == SeasonType || item.Type_ == EpisodeType {
 				result = append(result, item)
 			}
+			break
 		case CollectionHomeVideos:
 			if item.Type_ == VideoType || item.Type_ == FolderType {
 				result = append(result, item)
 			}
+			break
 		default:
 		}
 	}

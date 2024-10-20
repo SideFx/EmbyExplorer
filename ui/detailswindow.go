@@ -92,6 +92,7 @@ func newContentPanel() (*unison.Panel, bool, bool) {
 				ovw = m.M.Overview
 				break
 			}
+			break
 		case api.CollectionTVShows:
 			tvshow := models.TVShowTable.SelectedRows(true)
 			for _, t := range tvshow {
@@ -99,6 +100,7 @@ func newContentPanel() (*unison.Panel, bool, bool) {
 				ovw = t.M.Overview
 				break
 			}
+			break
 		default:
 		}
 		panel.SetLayout(&unison.FlexLayout{

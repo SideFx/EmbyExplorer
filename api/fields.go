@@ -25,10 +25,13 @@ func GetFields(collectiontype string) string {
 	switch collectiontype {
 	case CollectionMovies:
 		m = models.MovieTableDescription.APIFields
+		break
 	case CollectionTVShows:
 		m = models.TVShowTableDescription.APIFields
+		break
 	case CollectionHomeVideos:
 		m = models.HomeVideoTableDescription.APIFields
+		break
 	default:
 	}
 	return m
@@ -74,6 +77,7 @@ func GetTVShowDisplayData(dto []BaseItemDto) []models.TVShowData {
 			item.SeriesId = d.Id
 			item.Type_ = d.Type_
 			series = append(series, item)
+			break
 		case SeasonType:
 			item.Season = d.Name
 			item.SeriesId = d.SeriesId
@@ -82,6 +86,7 @@ func GetTVShowDisplayData(dto []BaseItemDto) []models.TVShowData {
 			item.Path = d.Path
 			item.Type_ = d.Type_
 			seasons = append(seasons, item)
+			break
 		case EpisodeType:
 			item.Episode = d.Name
 			item.EpisodeId = d.Id
@@ -98,6 +103,7 @@ func GetTVShowDisplayData(dto []BaseItemDto) []models.TVShowData {
 			item.SeasonId = d.SeasonId
 			item.Type_ = d.Type_
 			episodes = append(episodes, item)
+			break
 		default:
 		}
 	}
@@ -170,11 +176,13 @@ func GetHomeVideoDisplayData(dto []BaseItemDto) []models.HomeVideoData {
 			video.Path = d.Path
 			video.ParentId = d.ParentId
 			videos = append(videos, video)
+			break
 		case FolderType:
 			folder = models.HomeVideoData{}
 			folder.Name = d.Name
 			folder.FolderId = d.Id
 			folders = append(folders, folder)
+			break
 		default:
 		}
 	}
