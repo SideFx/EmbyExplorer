@@ -208,8 +208,7 @@ func GetHomeVideoDisplayData(dto []BaseItemDto) []models.HomeVideoData {
 func evalStudios(studios []NameLongIdPair) string {
 	var s = ""
 	for i, studio := range studios {
-		i++
-		if i > maxStudios {
+		if i >= maxStudios {
 			break
 		}
 		s = commaString(s, studio.Name)
