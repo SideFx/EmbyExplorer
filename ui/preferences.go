@@ -69,7 +69,6 @@ func encode(b []byte) []byte {
 	copy(c, b)
 	j := 0
 	for i, e := range c {
-		i++
 		if i > bits-1 {
 			i = 1
 		}
@@ -84,7 +83,6 @@ func decode(b []byte) []byte {
 	copy(c, b)
 	j := 0
 	for i, d := range c {
-		i++
 		if i > bits-1 {
 			i = 1
 		}
