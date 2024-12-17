@@ -147,11 +147,6 @@ func GetTVShowDisplayData(dto []BaseItemDto) []models.TVShowData {
 			for _, e := range episodesstmp {
 				e.Name = s.Name
 				e.Season = n.Season
-				e.Genres = s.Genres
-				e.Studios = s.Studios
-				if e.Actors == "" {
-					e.Actors = s.Actors
-				}
 				result = append(result, e)
 			}
 		}
