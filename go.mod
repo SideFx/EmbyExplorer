@@ -3,8 +3,8 @@ module Emby_Explorer
 go 1.23.4
 
 require (
-	github.com/richardwilkes/toolbox v1.122.0
-	github.com/richardwilkes/unison v0.76.3
+	github.com/richardwilkes/toolbox v1.122.1
+	github.com/richardwilkes/unison v0.77.0
 	github.com/xuri/excelize/v2 v2.9.0
 	golang.org/x/net v0.33.0
 )
